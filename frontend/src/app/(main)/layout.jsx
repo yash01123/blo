@@ -6,11 +6,17 @@ import Navbar from './navbar';
 const MainLayout = ({ children }) => {
     return (
         <>
-            <Navbar />
-            
-           
-            {children}
-            
+            <html>
+                <body>
+
+
+                    <Navbar />
+
+
+                    {children}
+                </body>
+            </html>
+
         </>
     )
 }

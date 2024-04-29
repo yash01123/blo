@@ -2,6 +2,11 @@
 const express =require('express')
 
 const userRouter =require('./routers/userRouter');
+const utilRouter =require('./routers/util');
+
+const cors = require('cors');
+const adminRouter =require('./routers/adminRouter');
+
 
 //initialize express
 const app=express();
@@ -9,7 +14,13 @@ const port =5000;
 
 //middleware
 
+app.use(cors({
+    origin:['http://localhost:3000']
+}));
+app.use(express.json());
 app.use('/user' , userRouter);
+app.use('/admin' , adminRouter);
+app.use('/util' , utilRouter);
 
 
 // endpoint

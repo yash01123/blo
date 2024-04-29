@@ -1,129 +1,118 @@
-import React from 'react'
+'use client'
+import React, { useState, useEffect, useContext } from 'react';
 
+import { styled, Box, TextareaAutosize, Button, InputBase, FormControl  } from '@mui/material';
+import { AddCircle as Add } from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const create = () => {
-  return (
-    <div>
-      <h2 className='text-white text-xl mx-4 uppercase' >Create Blog</h2>
-      <br />
-      <h5 className='mx-4 text-white'>Category</h5>
-    <div className="dropdown">
-  <a
-    className="btn btn-secondary dropdown-toggle mx-4"
-    href="#"
-    role="button"
-    data-bs-toggle="dropdown"
-    aria-expanded="false"
-  >
-   select
-  </a>
- {/*<ul className="dropdown-menu mx-4">
-    <li>
-      <a className="dropdown-item" href="#">
-        Action
-      </a>
-    </li>
-    <li>
-      <a className="dropdown-item" href="#">
-        Another action
-      </a>
-    </li>
-    <li>
-      <a className="dropdown-item" href="#">
-        Something else here
-      </a>
-    </li>
-  </ul>
-   */}
-</div>
- 
-<br />
-<br />
-<>
-  {/* component */}
-  <link
-    href="#"
-    rel="stylesheet"
-  />
-  <div
-    className=" flex  justify-center  py-12 px-4   relative items-center ml-"
-   
-  >
-    <div className=" bg-black opacity-60 " />
-    <div className="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10">
-      <div className="text-center">
-        <h2 className="mt-5 text-3xl font-bold text-gray-900">File Upload!</h2>
-        <p className="mt-2 text-sm text-gray-400">
-          Lorem ipsum is placeholder text.
-        </p>
-      </div>
-      <form className="mt-8 space-y-3" action="#" method="POST">
-        <div className="grid grid-cols-1 space-y-2">
-          <label className="text-sm font-bold text-gray-500 tracking-wide">
-            Title
-          </label>
-          <input
-            className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-            type=""
-            placeholder=""
-          />
-        </div>
-        <div className="grid grid-cols-1 space-y-2">
-          <label className="text-sm font-bold text-gray-500 tracking-wide">
-            Attach Document
-          </label>
-          <div className="flex items-center justify-center w-full">
-            <label className="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center">
-              <div className="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
-                {/*-<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-400 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                              </svg>*/}
-                <div className="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
-                  <img
-                    className="has-mask h-36 object-center"
-                    src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg"
-                    alt="freepik image"
-                  />
-                </div>
-                <p className="pointer-none text-gray-500 ">
-                  <span className="text-sm">Drag and drop</span> files here{" "}
-                  <br /> or{" "}
-                  <a href="" id="" className="text-blue-600 hover:underline">
-                    select a file
-                  </a>{" "}
-                  from your computer
-                </p>
-              </div>
-              <input type="file" className="hidden" />
-            </label>
-          </div>
-        </div>
-        <p className="text-sm text-gray-300">
-          <span>File type: doc,pdf,types of images</span>
-        </p>
-        <div>
-          <button
-            type="submit"
-            className="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4  rounded-full tracking-wide
-                              font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300"
-          >
-            Upload
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <style
-    dangerouslySetInnerHTML={{
-      __html:
-        "\n\t.has-mask {\n\t\tposition: absolute;\n\t\tclip: rect(10px, 150px, 130px, 10px);\n\t}\n"
-    }}
-  />
-</>
+import { API } from '../../service/api';
+import { DataContext } from '../../context/DataProvider';
 
+const Container = styled(Box)(({ theme }) => ({
+    margin: '50px 100px',
+    [theme.breakpoints.down('md')]: {
+        margin: 0
+    }
+}));
 
-    </div>
-  )
+const Image = styled('img')({
+    width: '100%',
+    height: '50vh',
+    objectFit: 'cover'
+});
+
+const StyledFormControl = styled(FormControl)`
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+`;
+
+const InputTextField = styled(InputBase)`
+    flex: 1;
+    margin: 0 30px;
+    font-size: 25px;
+`;
+
+const Textarea = styled(TextareaAutosize)`
+    width: 100%;
+    border: none;
+    margin-top: 50px;
+    font-size: 18px;
+    &:focus-visible {
+        outline: none;
+    }
+`;
+
+const initialPost = {
+    title: '',
+    description: '',
+    picture: '',
+    username: '',
+    categories: '',
+    createdDate: new Date()
 }
 
-export default create
+const CreatePost = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const [post, setPost] = useState(initialPost);
+    const [file, setFile] = useState('');
+    const { account } = useContext(DataContext);
+
+    const url = post.picture ? post.picture : 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
+    
+    useEffect(() => {
+        const getImage = async () => { 
+            if(file) {
+                const data = new FormData();
+                data.append("name", file.name);
+                data.append("file", file);
+                
+                const response = await API.uploadFile(data);
+                post.picture = response.data;
+            }
+        }
+        getImage();
+        post.categories = location.search?.split('=')[1] || 'All';
+        post.username = account.username;
+    }, [file])
+
+    const savePost = async () => {
+        await API.createPost(post);
+        navigate('/');
+    }
+
+    const handleChange = (e) => {
+        setPost({ ...post, [e.target.name]: e.target.value });
+    }
+
+    return (
+        <Container>
+            <Image src={url} alt="post" />
+
+            <StyledFormControl>
+                <label htmlFor="fileInput">
+                    <Add fontSize="large" color="action" />
+                </label>
+                <input
+                    type="file"
+                    id="fileInput"
+                    style={{ display: "none" }}
+                    onChange={(e) => setFile(e.target.files[0])}
+                />
+                <InputTextField onChange={(e) => handleChange(e)} name='title' placeholder="Title" />
+                <Button onClick={() => savePost()} variant="contained" color="primary">Publish</Button>
+            </StyledFormControl>
+
+            <Textarea
+                rowsMin={5}
+                placeholder="Tell your story..."
+                name='description'
+                onChange={(e) => handleChange(e)} 
+            />
+        </Container>
+    )
+}
+
+export default CreatePost;
