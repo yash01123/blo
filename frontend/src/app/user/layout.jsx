@@ -1,19 +1,14 @@
-import React from 'react';
-import Sidebar from './Sidebar';
+'use client'
+import React from 'react'
+import { Nav } from './navbar';
 
 const Layout = ({ children }) => {
     return (
-        <div>
-            <div className='grid grid-cols-12'>
-                <div className='col-span-2'>
-                    <Sidebar />
-                </div>
-                <div className='col-span-10'>
-                    {children}
-                </div>
-            </div>
-        </div>
+        <>
+        <Nav />
+            {children}
+        </>
     )
 }
 
-export default Layout
+export default Layout;
