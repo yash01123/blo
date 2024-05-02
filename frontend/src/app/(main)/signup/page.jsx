@@ -50,7 +50,8 @@ const Signup = () => {
   })
 
   return (
-    <section className="vh-100 bg-primary-subtle md-100 ">
+    <div className='ml-60'>
+    <section className="vh-100 bg-primary-subtle md-100 ml-96">
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col">
@@ -160,8 +161,9 @@ const Signup = () => {
                         </button>
                       </div>
                     </form>
+                    <br />
 
-                    <p>Already Registered? <Link href='/login'>Login Here</Link></p>
+                    <p>Already Registered? <Link href='/login' className='text-blue'>Login Here</Link></p>
 
                   </div>
                 </div>
@@ -171,6 +173,7 @@ const Signup = () => {
         </div>
       </div>
     </section>
+    </div>
 
   )
 }

@@ -27,12 +27,12 @@ const About = () => {
         <Box>
             <Banner/>
             <Wrapper>
-                <Typography variant="h3">Code for Interview</Typography>
-                <Text variant="h5">I'm a Software Engineer based in India. 
-                    I've built websites, desktop applications and corporate software.<br />
-                    If you are interested, you can view some of my favorite projects here
+               
+                <Text variant="h5">Are you interested in [insert your niche or area of expertise]?  Then you've come to the right place! This blog is your one-stop shop for all things [niche].
+
+We're passionate about [explain what you're passionate about related to your niche] and we want to share our knowledge and enthusiasm with you. Whether you're a seasoned pro or just starting out, we hope you'll find our content informative, engaging, and inspiring.
                     <Box component="span" style={{ marginLeft: 5 }}>
-                        <Link href="https://github.com/kunaltyagi9" color="inherit" target="_blank"><GitHub /></Link>
+                       
                     </Box>
                 </Text>
                 <Text variant="h5">
