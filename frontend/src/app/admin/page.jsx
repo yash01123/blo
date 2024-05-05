@@ -1,21 +1,11 @@
-'use client'
+import React from 'react'
 
 import Link from 'next/link'
-import React, { useRef, useState } from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-// import required modules
-import { Autoplay, Pagination } from 'swiper/modules';
-
 
 const Home = () => {
   return (
     < >
-    
+
       <header className="text-gray-600  body-font">
         <div className='bg-black'>
           <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -42,7 +32,7 @@ const Home = () => {
             </nav>
 
             <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-              <Link href={'/login'}>Login</Link>
+              <Link href={'/admin/dashboard'}>Dashboard</Link>
               <svg
                 fill="none"
                 stroke="currentColor"
@@ -58,35 +48,6 @@ const Home = () => {
           </div>
         </div>
       </header>
-
-
-      <Swiper
-        slidesPerView={3}
-        spaceBetween={1}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Autoplay, Pagination]}
-        className="mySwiper"
-      >
-        
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/b0mloQcTRHa981DS9z7ZQQ.png" alt=""  className='size-10/12'/></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/3dB_GJzVSm-pVIUZvlFzeQ.jpg" alt=""  className='size-10/12' /></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/P-VLiggxSrifQPOp97pfHg.jpg" alt=""  className='size-10/12' /></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/SBVUkJOTRLKL3FPpKrdk0Q.jpg" alt=""  className='size-10/12' /></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/wsoUZK_VRpO07_0lWQxVsQ.jpg" alt=""  className='size-10/12' /></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/v7w_jDNpSTW72eYoXYlbTw.jpg" alt=""  className='size-10/12' /></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/UYp3aLrrSEWGiwWcuLS67Q.jpg" alt=""  className='size-10/12' /></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/kL1-JvT-R922-E4jEEnABw.jpg" alt=""  className='size-10/12'/></SwiperSlide>
-        <SwiperSlide><img src="https://ideogram.ai/api/images/direct/OMBrt6FSR6iAVOjVfMZo2A.jpg" alt=""  className='size-10/12'/></SwiperSlide>
-     
-      </Swiper>
-
-
 
       <div className=" py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">

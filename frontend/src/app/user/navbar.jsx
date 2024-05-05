@@ -1,5 +1,6 @@
 'use client'
 
+
 export const Nav = () => {
 
   return (
@@ -37,6 +38,9 @@ export const Nav = () => {
               </a>
             </nav>
             {/* nav - end */}
+            <div className='account flexCenter'>
+            
+          </div>
 
           </div>
         </header>

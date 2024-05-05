@@ -76,9 +76,9 @@ const Signup = () => {
                 <div className="col-xl-6">
 
                   <div className="card-body p-md-5">
-                    <h3 className="mb-5 text-primary fw-bold">
+                    <h1 className="mb-5 text-primary fw-bold">
                       Registration Form
-                    </h3>
+                    </h1>
                     <form onSubmit={signupForm.handleSubmit} >
 
                       <div class="mb-3">
@@ -96,7 +96,7 @@ const Signup = () => {
                         )}
                       </div>
                       <div class="mb-3">
-                        <label for="" class="form-label">Name</label>
+                        <label for="" class="form-label col">Name</label>
                         <input
                           type="text"
                           id="name"
