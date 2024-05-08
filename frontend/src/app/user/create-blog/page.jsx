@@ -1,29 +1,24 @@
 'use client';
 import { useFormik } from 'formik';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 
-
-
-
-
-
 const create = () => {
+
+  const [selFile, setselFile] = useState([])
   const createForm = useFormik({
     initialValues: {
       title: '',
       category: '',
-      text: '',
       image: '',
-
     },
     onSubmit: (values) => {
       console.log(values);
       // send values to backend
-
-      fetch('http://localhost:5000/create/add', {
+      values.image = selFile
+      fetch('http://localhost:5000/blog/add', {
         method: 'POST',
         body: JSON.stringify(values),
         headers: {
@@ -33,27 +28,29 @@ const create = () => {
         .then((response) => {
           console.log(response.status);
           if (response.status === 200) {
-            toast.success('Form Submited Successfully');
+            toast.success('uploaded Successfully');
           } else {
-            toast.error('Form submission Successfully')
+            toast.error('Failed')
           }
         }).catch((err) => {
           console.log(err);
-          toast.error('Form submission failed')
+          toast.error('Failed')
         });
     },
-  
+
   })
 
   const uploadFile = (e) => {
     const file = e.target.files[0];
     const fd = new FormData();
+    setselFile(file.name)
     fd.append("myfile", file);
     fetch("http://localhost:5000/util/uploadfile", {
       method: "POST",
       body: fd,
     }).then((res) => {
       if (res.status === 200) {
+        createForm.setFieldValue('image', file.name)
         console.log("file uploaded");
         toast.success('File uploaded successfully')
       }
@@ -67,10 +64,10 @@ const create = () => {
         <section className="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 ">
 
           <h1 className="text-xl font-bold text-white capitalize dark:text-white text-center">
-           Upload Your Blog
+            Upload Your Blog
           </h1>
           <br />
-          <form onSubmit={compeForm.handleSubmit}>
+          <form onSubmit={createForm.handleSubmit}>
             <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label className="text-white dark:text-gray-200" htmlFor="username">
@@ -78,20 +75,17 @@ const create = () => {
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  onChange={compeForm.handleChange}
-                  value={compeForm.values.name}
-
+                  id="title"
+                  onChange={createForm.handleChange}
+                  value={createForm.values.title}
                   placeholder=""
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring text-black"
                 />
-                {compeForm.touched.name && (
-                  <small class="text-danger">{compeForm.errors.name}</small>
+                {createForm.touched.name && (
+                  <small class="text-danger">{createForm.errors.name}</small>
                 )}
               </div>
-              
-              
-              
+
 
               <div>
                 <label
@@ -100,35 +94,15 @@ const create = () => {
                 >
                   Select Category
                 </label>
-                <select className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring text-black">
-                  <option>Tech</option>
-                  <option>Art</option>
-                  <option>Maths</option>
-                  <option>Adventure</option>
+                <select id='category' onChange={createForm.handleChange} value={createForm.values.category} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring text-black">
+                  <option value="tech">Tech</option>
+                  <option value="art">Art</option>
+                  <option value="maths">Maths</option>
+                  <option value="adventure">Adventure</option>
                 </select>
               </div>
 
 
-              
-              <div>
-                <label
-                  className="text-white dark:text-gray-200"
-                  htmlFor="textarea"
-                >
-                  Text Area
-                </label>
-                <textarea
-                  id="textarea"
-                  type="textarea"
-                  onChange={compeForm.handleChange}
-                  value={compeForm.values.textarea}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring text-black"
-                  defaultValue={""}
-                />
-                {compeForm.touched.textarea && (
-                  <small class="text-danger">{compeForm.errors.textarea}</small>
-                )}
-              </div>
               <div>
                 <label className="block text-sm font-medium text-white">Image</label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
