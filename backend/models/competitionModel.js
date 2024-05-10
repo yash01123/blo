@@ -2,11 +2,11 @@ const { model, Schema } = require('../connection');
 
 const mySchema = new Schema({
     title: { type: String, require: true },
-    description: { type: String, require: true },
+    description: { type: String },
     endDate: { type: Date },
     banner: { type: String },
-    textarea: { type: String, require: true },
+    prize: { type: String },
     createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = model('admin', mySchema);
+module.exports = model('competition', mySchema);

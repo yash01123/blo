@@ -1,12 +1,12 @@
 //import express
 const express = require('express')
 
-const userRouter = require('./routers/userRouter');
-const utilRouter = require('./routers/util');
 
 const cors = require('cors');
-const adminRouter = require('./routers/adminRouter');
+const userRouter = require('./routers/userRouter');
+const utilRouter = require('./routers/util');
 const blogRouter = require('./routers/blogRouter')
+const competitionRouter = require('./routers/competitionRouter')
 
 
 //initialize express
@@ -20,9 +20,10 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use('/user', userRouter);
-app.use('/admin', adminRouter);
 app.use('/util', utilRouter);
 app.use('/blog', blogRouter);
+app.use('/competition', competitionRouter);
+
 app.use(express.static('./static/uploads'));
 
 

@@ -13,6 +13,7 @@ const MainLayout = ({ children }) => {
                   
                     
                     {children}  
+                    
                     <Footer />
                    
                 </body>

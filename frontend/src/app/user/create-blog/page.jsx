@@ -3,9 +3,14 @@ import { useFormik } from 'formik';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import MDEditor from '@uiw/react-md-editor';
+import { useRouter } from 'next/navigation';
 
 
 const create = () => {
+  const router = useRouter();
+  const [value, setValue] = React.useState("*Hello world!!!*");
+  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
   const [selFile, setselFile] = useState([])
   const createForm = useFormik({
@@ -13,8 +18,11 @@ const create = () => {
       title: '',
       category: '',
       image: '',
+      description: '',
+      content: ''
     },
     onSubmit: (values) => {
+      values.content = value
       console.log(values);
       // send values to backend
       values.image = selFile
@@ -23,12 +31,14 @@ const create = () => {
         body: JSON.stringify(values),
         headers: {
           'Content-Type': 'application/json'
+
         }
       })
         .then((response) => {
           console.log(response.status);
           if (response.status === 200) {
-            toast.success('uploaded Successfully');
+            toast.success('uploaded Successfully')
+            router.push("/browse-blog")
           } else {
             toast.error('Failed')
           }
@@ -104,6 +114,24 @@ const create = () => {
 
 
               <div>
+                <label className="text-white dark:text-gray-200" htmlFor="username">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  id="description"
+                  onChange={createForm.handleChange}
+                  value={createForm.values.description}
+                  placeholder=""
+                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring text-black"
+                />
+                {createForm.touched.description && (
+                  <small class="text-danger">{createForm.errors.description}</small>
+                )}
+              </div>
+
+
+              <div>
                 <label className="block text-sm font-medium text-white">Image</label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                   <div className="space-y-1 text-center">
@@ -140,6 +168,22 @@ const create = () => {
                     <p className="text-xs text-white">PNG, JPG, GIF up to 10MB</p>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="col-span-full">
+              <label
+                htmlFor="product-details"
+                className="text-sm font-medium text-gray-900 block mb-2"
+              >
+                Content
+              </label>
+              <div className="container">
+                <MDEditor
+                  value={value} onChange={setValue}
+                />
+                {createForm.touched.content && (
+                  <small class="text-danger">{createForm.errors.content}</small>
+                )}
               </div>
             </div>
             <div className="flex justify-end mt-6 ">
