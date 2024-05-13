@@ -2,6 +2,13 @@
 
 import Link from 'next/link'
 import React, { useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+import './style.css';
+import { relative } from 'path';
+import { Autoplay, Pagination } from 'swiper/modules';
 // Import Swiper React components
 
 
@@ -14,7 +21,7 @@ const Home = () => {
     < >
     
       <header className="text-gray-600  body-font">
-        <div className='bg-black'>
+        <div className='bg-black text-white'>
           <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
               <svg
@@ -56,33 +63,42 @@ const Home = () => {
         </div>
       </header>
 
-      <div className=" py-6 sm:py-8 lg:py-12">
-  <div className="mx-auto max-w-screen-2xl px-4 md:px-6">
-    {/* text - start */}
-    <div className="mb-10 md:mb-16">
-      <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
-        Blog
-      </h2>
-      <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-        This is a section of some simple filler text, also known as placeholder
-        text. It shares some characteristics of a real written text but is
-        random or otherwise generated.
-      </p>
-   
+      <>
+     
+      <Swiper 
+      spaceBetween={30}
+      centeredSlides={true}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
+      pagination={{
+        clickable: true,
+      }}
+      navigation={true}
+      modules={[Autoplay, Pagination, Navigation]}
+      className="mySwiper"
+    >
       
-      
-   
-    </div>
-   
-    </div>
-  </div>
+        <SwiperSlide><img src="https://wallpapers.com/images/high/calligraphy-4k-ultra-hd-motivational-oarlgu4guo0pg80e.webp" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://wallpapers.com/images/hd/the-enigmatic-power-of-the-black-aesthetic-u0xe7u4fajxvp3ys.webp" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://wallpapers.com/images/high/4k-ultra-hd-motivational-lifting-quote-xaxewupskei0xydv.webp" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://as2.ftcdn.net/v2/jpg/05/52/94/79/1000_F_552947925_a68b4drHnpMhfmXjfBS9ViLi0uQbWu88.jpg" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="https://wallpapers.com/images/high/notebook-4k-ultra-hd-motivational-ox1von4doh9jjflk.webp" alt="" /></SwiperSlide>
+        
+      </Swiper>
+    </>
+
+
+
+
 
 
      
 
 
 
-      <div className=" py-6 sm:py-8 lg:py-12">
+      <div className=" py-6 sm:py-8 lg:py-12 text-white">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
           <div className="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
             <div className="flex items-center gap-12">
@@ -93,7 +109,7 @@ const Home = () => {
             </div>
             <Link
               href="/blog"
-              className="inline-block rounded-lg border bg-white px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base"
+              className="inline-block rounded-lg border bg-black px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base"
             >
               More
             </Link>
@@ -175,7 +191,7 @@ const Home = () => {
 
 
 
-      <div className=" py-6 sm:py-8 lg:py-12">
+      <div className=" py-6 sm:py-8 lg:py-12 text-white">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
           <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl xl:mb-12">
             Trending
@@ -254,7 +270,7 @@ const Home = () => {
 
             <Link
               href="/blog"
-              className="inline-block rounded-lg border bg-white px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base"
+              className="inline-block rounded-lg border bg-black px-4 py-2 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base"
             >
               More
             </Link>
@@ -266,7 +282,7 @@ const Home = () => {
 
 
 
-      <section className=" text-gray-600 body-font">
+      <section className=" text-gray-600 body-font text-white">
         <div className="container px-5 py-24 mx-auto">
           <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl xl:mb-12">
             Latest Blogs
@@ -479,7 +495,7 @@ const Home = () => {
 
 
 
-      <div className=" py-6 sm:py-8 lg:py-12">
+      <div className=" py-6 sm:py-8 lg:py-12 text-white">
         <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           {/* text - start */}
           <div className="mb-10 md:mb-16">
@@ -615,7 +631,7 @@ const Home = () => {
       </div>
 
 
-      <div className='bg-black'>
+      <div className='bg-black text-white'>
         <footer className="text-gray-600 body-font">
           <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
             <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">

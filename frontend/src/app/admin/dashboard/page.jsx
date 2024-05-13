@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const AdminDashboard = () => {
   return (
@@ -102,7 +103,7 @@ const AdminDashboard = () => {
           className="flex font-semibold items-center py-2 px-4 text-black hover:bg-blue hover:text-gray-100 rounded-md group-[.active]:bg-blue group-[.active]:text-white group-[.selected]:bg-blue group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
         >
           <i className="bx bx-user mr-3 text-lg" />
-          <span className="text-sm">Users</span>
+          <Link href={'/admin/account'} className="text-sm">Profile</Link>
           <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90" />
         </a>
       </li>
