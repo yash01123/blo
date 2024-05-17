@@ -7,6 +7,7 @@ module.exports = {
 
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    './node_modules/preline/preline.js',
   ],
   
     theme: {
@@ -68,5 +69,7 @@ module.exports = {
       }
     },
    
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),
+  require('preline/plugin'),
+  ],
 }

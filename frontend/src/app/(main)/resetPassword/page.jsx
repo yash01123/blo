@@ -40,9 +40,9 @@ const ResetPassword = () => {
         });
         console.log(res.status);
         if (res.status === 201) {
-            enqueueSnackbar('OTP sent successfully', { variant: 'success' });
+            toast.success('OTP sent successfully', { variant: 'success' });
         } else {
-            enqueueSnackbar('Something went wrong', { variant: 'error' });
+            toast.error('Something went wrong', { variant: 'error' });
         }
     }
 
@@ -52,7 +52,7 @@ const ResetPassword = () => {
         if (res.status === 200) {
             setShowForm(true);
         } else {
-            enqueueSnackbar('Invalid OTP', { variant: 'error' });
+            toast.error('Invalid OTP', { variant: 'error' });
         }
     }
 
@@ -66,10 +66,10 @@ const ResetPassword = () => {
         });
         // console.log(res.status);
         if (res.status === 200) {
-            enqueueSnackbar('Password updated successfully', { variant: 'success' });
+           toast.success('Password updated successfully', { variant: 'success' });
             router.push("/login")
         } else {
-            enqueueSnackbar('Something went wrong', { variant: 'error' });
+           toast.error('Something went wrong', { variant: 'error' });
         }
     }
 

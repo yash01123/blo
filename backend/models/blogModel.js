@@ -6,6 +6,7 @@ const myschema = new Schema({
     image: { type: String },
     content: { type: String},
     description: { type: String, require: true },
+    comment: { type: String },
     
     createdAt: {type : Date, default: Date.now}
 })
