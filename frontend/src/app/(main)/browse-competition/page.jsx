@@ -57,7 +57,7 @@ const Browse = () => {
                 
                     <Link
                         className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl  text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800"
-                        href={""}
+                        href={"/view-competition/" + comp._id}
                     >
                         More Details
                     </Link>

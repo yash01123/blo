@@ -7,6 +7,7 @@ const userRouter = require('./routers/userRouter');
 const utilRouter = require('./routers/util');
 const blogRouter = require('./routers/blogRouter')
 const competitionRouter = require('./routers/competitionRouter')
+const participationRouter = require('./routers/participationRouter')
 
 
 //initialize express
@@ -23,9 +24,9 @@ app.use('/user', userRouter);
 app.use('/util', utilRouter);
 app.use('/blog', blogRouter);
 app.use('/competition', competitionRouter);
+app.use('/participation', participationRouter);
 
 app.use(express.static('./static/uploads'));
-
 
 // endpoint
 app.get('/', (req, res) => {

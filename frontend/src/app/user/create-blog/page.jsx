@@ -15,6 +15,7 @@ const create = () => {
   const [selFile, setselFile] = useState([])
   const createForm = useFormik({
     initialValues: {
+      user: currentUser._id,
       title: '',
       category: '',
       image: '',
