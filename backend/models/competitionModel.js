@@ -6,6 +6,7 @@ const mySchema = new Schema({
     endDate: { type: Date },
     banner: { type: String },
     prize: { type: String },
+    winner:  { type: Schema.Types.ObjectId, ref: 'user' },
     createdAt: { type: Date, default: Date.now }
 });
 

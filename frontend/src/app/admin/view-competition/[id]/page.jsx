@@ -64,11 +64,11 @@ const ViewCompetition = () => {
   const displayParticipants = () => {
     if (participantList.length > 0) {
       return (
-        <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div className="relative overflow-x-auto ml-64 mt-11">
+          <table className="w-full text-sm text-left rtl:text-right text-black">
+            <thead className="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 text-black">
                   Participant name
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -88,10 +88,10 @@ const ViewCompetition = () => {
             <tbody>
               {
                 participantList.map((participant, index) => (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <tr className="text-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th
                       scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                     >
                       {participant.user.name}
                     </th>

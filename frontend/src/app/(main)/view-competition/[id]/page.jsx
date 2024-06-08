@@ -95,7 +95,7 @@ const CompetitionDetails = () => {
       return <>
         <div className="h-96">
           <header className=' bg-white'>
-            <h1 className='text-3xl text-purple-800 font-semibold mb-12 text-center'>{competitionData.topic}</h1>
+            <h1 className='text-3xl text-purple-800 font-semibold mb-12 text-center'>{competitionData.title}</h1>
           </header>
           <div>
 
