@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -9,6 +9,7 @@ import { Navigation } from 'swiper/modules';
 import './style.css';
 import { relative } from 'path';
 import { Autoplay, Pagination } from 'swiper/modules';
+import Navbar from './(main)/navbar';
 // Import Swiper React components
 
 
@@ -17,85 +18,65 @@ import { Autoplay, Pagination } from 'swiper/modules';
 
 
 const Home = () => {
+
+  const [blogList, setBlogList] = useState([]);
+
+  const fetchBlogs = () => {
+    fetch('http://localhost:5000/blog/getall')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setBlogList(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    fetchBlogs();
+  }, [])
+
+
   return (
     < >
-    
-      <header className="text-gray-600  body-font">
-        <div className='bg-black text-white'>
-          <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-              <span className="ml-3 text-xl">NUkkkad Blog</span>
-            </a>
-            <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-              <Link className="mr-5 hover:text-gray-900" href={'http://localhost:3000/'}>Home</Link>
-              <Link className="mr-5 hover:text-gray-900" href={'/browse-blog'}>Blogs</Link>
-              <Link  className="mr-5 hover:text-gray-900" href={'/browse-competition'}>Competitions</Link>
-              <Link className="mr-5 hover:text-gray-900" href={'/about'}>About</Link>
-              <Link className="mr-5 hover:text-gray-900" href={'/contact'}>Contact</Link>
-            </nav>
 
-            <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-              <Link href={'/login'}>Login</Link>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                className="w-4 h-4 ml-1"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <>
-     
-      <Swiper 
-      spaceBetween={30}
-      centeredSlides={true}
-      autoplay={{
-        delay: 2500,
-        disableOnInteraction: false,
-      }}
-      pagination={{
-        clickable: true,
-      }}
-      navigation={true}
-      modules={[Autoplay, Pagination, Navigation]}
-      className="mySwiper"
-    >
-      
-        <SwiperSlide><img src="https://wallpapers.com/images/high/calligraphy-4k-ultra-hd-motivational-oarlgu4guo0pg80e.webp" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="https://wallpapers.com/images/hd/the-enigmatic-power-of-the-black-aesthetic-u0xe7u4fajxvp3ys.webp" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="https://wallpapers.com/images/high/4k-ultra-hd-motivational-lifting-quote-xaxewupskei0xydv.webp" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="https://as2.ftcdn.net/v2/jpg/05/52/94/79/1000_F_552947925_a68b4drHnpMhfmXjfBS9ViLi0uQbWu88.jpg" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="https://wallpapers.com/images/high/notebook-4k-ultra-hd-motivational-ox1von4doh9jjflk.webp" alt="" /></SwiperSlide>
-        
-      </Swiper>
-    </>
+
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper"
+        >
+
+          <SwiperSlide><img src="https://wallpapers.com/images/high/calligraphy-4k-ultra-hd-motivational-oarlgu4guo0pg80e.webp" alt="" /></SwiperSlide>
+          <SwiperSlide><img src="https://wallpapers.com/images/hd/the-enigmatic-power-of-the-black-aesthetic-u0xe7u4fajxvp3ys.webp" alt="" /></SwiperSlide>
+          <SwiperSlide><img src="https://wallpapers.com/images/high/4k-ultra-hd-motivational-lifting-quote-xaxewupskei0xydv.webp" alt="" /></SwiperSlide>
+          <SwiperSlide><img src="https://as2.ftcdn.net/v2/jpg/05/52/94/79/1000_F_552947925_a68b4drHnpMhfmXjfBS9ViLi0uQbWu88.jpg" alt="" /></SwiperSlide>
+          <SwiperSlide><img src="https://wallpapers.com/images/high/notebook-4k-ultra-hd-motivational-ox1von4doh9jjflk.webp" alt="" /></SwiperSlide>
+
+        </Swiper>
+      </>
 
 
 
 
 
 
-     
+
 
 
 
@@ -289,348 +270,79 @@ const Home = () => {
             Latest Blogs
           </h2>
           <div className="flex flex-wrap -m-4">
-            <div className="p-4 md:w-1/3">
-              <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                <img
-                  className="lg:h-48 md:h-36 w-full object-cover object-center"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcpCNcbw9OXe4oFlKCinSM6QHzziSMw_AWHA&s"
-                  alt="blog"
-                />
-                <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    RETRO
-                  </h2>
-                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    The Catalyzer
-                  </h1>
-                  <p className="leading-relaxed mb-3">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-                    microdosing tousled waistcoat.
-                  </p>
-                  <div className="flex items-center flex-wrap ">
-                    <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-                      Learn More
-                      <svg
-                        className="w-4 h-4 ml-2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="M12 5l7 7-7 7" />
-                      </svg>
-                    </a>
-                    <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                        <circle cx={12} cy={12} r={3} />
-                      </svg>
-                      1.2K
-                    </span>
-                    <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                      </svg>
-                      6
-                    </span>
+            {
+              blogList.slice(0, 3).map(blog => {
+                return <div className="p-4 md:w-1/3">
+                  <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                    <img
+                      className="lg:h-48 md:h-36 w-full object-cover object-center"
+                      src={'http://localhost:5000/' + blog.image}
+                      alt="blog"
+                    />
+                    <div className="p-6">
+                      <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                        {blog.category}
+                      </h2>
+                      <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+                        {blog.title}
+                      </h1>
+                      <p className="leading-relaxed mb-3">
+                        {blog.description}
+                      </p>
+                      <div className="flex items-center flex-wrap ">
+                        <Link href={'/view-blog/'+blog._id} className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
+                          View Blog
+                          <svg
+                            className="w-4 h-4 ml-2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12h14" />
+                            <path d="M12 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                        <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx={12} cy={12} r={3} />
+                          </svg>
+                          1.2K
+                        </span>
+                        <span className="text-gray-400 inline-flex items-center leading-none text-sm">
+                          <svg
+                            className="w-4 h-4 mr-1"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                          </svg>
+                          6
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/3">
-              <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                <img
-                  className="lg:h-48 md:h-36 w-full object-cover object-center"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuub1qqprhrAi5nC5Yol6grcv1y4xblegZKA&s"
-                  alt="blog"
-                />
-                <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    SCIENCE
-                  </h2>
-                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    The 400 Blows
-                  </h1>
-                  <p className="leading-relaxed mb-3">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-                    microdosing tousled waistcoat.
-                  </p>
-                  <div className="flex items-center flex-wrap">
-                    <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-                      Learn More
-                      <svg
-                        className="w-4 h-4 ml-2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="M12 5l7 7-7 7" />
-                      </svg>
-                    </a>
-                    <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                        <circle cx={12} cy={12} r={3} />
-                      </svg>
-                      1.2K
-                    </span>
-                    <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                      </svg>
-                      6
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/3">
-              <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                <img
-                  className="lg:h-48 md:h-36 w-full object-cover object-center"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLssVarLHe0zVLPSfbAj19kMNZwopRfSAzqw&s"
-                  alt="blog"
-                />
-                <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    TECH
-                  </h2>
-                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    Shooting Stars
-                  </h1>
-                  <p className="leading-relaxed mb-3">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-                    microdosing tousled waistcoat.
-                  </p>
-                  <div className="flex items-center flex-wrap ">
-                    <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-                      Learn More
-                      <svg
-                        className="w-4 h-4 ml-2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14" />
-                        <path d="M12 5l7 7-7 7" />
-                      </svg>
-                    </a>
-                    <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                        <circle cx={12} cy={12} r={3} />
-                      </svg>
-                      1.2K
-                    </span>
-                    <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                      </svg>
-                      6
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+              })
+            }
           </div>
         </div>
       </section>
-
-
-
-      <div className=" py-6 sm:py-8 lg:py-12 text-white">
-        <div className="mx-auto max-w-screen-xl px-4 md:px-8">
-          {/* text - start */}
-          <div className="mb-10 md:mb-16">
-            <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
-              Meet our Top Creators
-            </h2>
-
-          </div>
-          {/* text - end */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12">
-            {/* person - start */}
-            <div className="flex flex-col items-center gap-2 sm:flex-row md:gap-4">
-              <div className="h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-32 md:w-32">
-                <img
-                  src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=256"
-                  loading="lazy"
-                  alt="Photo by Radu Florin"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div>
-                <div className="text-center font-bold text-indigo-500 sm:text-left md:text-lg">
-                  John McCulling
-                </div>
-                <p className="text-center text-sm text-gray-500 sm:text-left md:text-base">
-                  Founder / CEO
-                </p>
-              </div>
-            </div>
-            {/* person - end */}
-            {/* person - start */}
-            <div className="flex flex-col items-center gap-2 sm:flex-row md:gap-4">
-              <div className="h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-32 md:w-32">
-                <img
-                  src="https://images.unsplash.com/photo-1532073150508-0c1df022bdd1?auto=format&q=75&fit=crop&w=256"
-                  loading="lazy"
-                  alt="Photo by christian ferrer"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div>
-                <div className="text-center font-bold text-indigo-500 sm:text-left md:text-lg">
-                  Kate Berg
-                </div>
-                <p className="text-center text-sm text-gray-500 sm:text-left md:text-base">
-                  CFO
-                </p>
-              </div>
-            </div>
-            {/* person - end */}
-            {/* person - start */}
-            <div className="flex flex-col items-center gap-2 sm:flex-row md:gap-4">
-              <div className="h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-32 md:w-32">
-                <img
-                  src="https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&q=75&fit=crop&w=256"
-                  loading="lazy"
-                  alt="Photo by Ayo Ogunseinde"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div>
-                <div className="text-center font-bold text-indigo-500 sm:text-left md:text-lg">
-                  Greg Jackson
-                </div>
-                <p className="text-center text-sm text-gray-500 sm:text-left md:text-base">
-                  CTO
-                </p>
-              </div>
-            </div>
-            {/* person - end */}
-            {/* person - start */}
-            <div className="flex flex-col items-center gap-2 sm:flex-row md:gap-4">
-              <div className="h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-32 md:w-32">
-                <img
-                  src="https://images.unsplash.com/photo-1529068755536-a5ade0dcb4e8?auto=format&q=75&fit=crop&w=256"
-                  loading="lazy"
-                  alt="Photo by Midas Hofstra"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div>
-                <div className="text-center font-bold text-indigo-500 sm:text-left md:text-lg">
-                  Robert Greyson
-                </div>
-                <p className="text-center text-sm text-gray-500 sm:text-left md:text-base">
-                  Creative Director
-                </p>
-              </div>
-            </div>
-            {/* person - end */}
-            {/* person - start */}
-            <div className="flex flex-col items-center gap-2 sm:flex-row md:gap-4">
-              <div className="h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-32 md:w-32">
-                <img
-                  src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&q=75&fit=crop&w=256"
-                  loading="lazy"
-                  alt="Photo by Elizeu Dias"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div>
-                <div className="text-center font-bold text-indigo-500 sm:text-left md:text-lg">
-                  John Roberts
-                </div>
-                <p className="text-center text-sm text-gray-500 sm:text-left md:text-base">
-                  Investor Relations
-                </p>
-              </div>
-            </div>
-            {/* person - end */}
-            {/* person - start */}
-            <div className="flex flex-col items-center gap-2 sm:flex-row md:gap-4">
-              <div className="h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-32 md:w-32">
-                <img
-                  src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&q=75&fit=crop&w=256"
-                  loading="lazy"
-                  alt="Photo by Matheus Ferrero"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div>
-                <div className="text-center font-bold text-indigo-500 sm:text-left md:text-lg">
-                  Judy Amandez
-                </div>
-                <p className="text-center text-sm text-gray-500 sm:text-left md:text-base">
-                  Senior Art Director
-                </p>
-              </div>
-            </div>
-            {/* person - end */}
-          </div>
-        </div>
-      </div>
-
 
       <div className='bg-black text-white'>
         <footer className="text-gray-600 body-font">

@@ -26,12 +26,12 @@ const navbar = () => {
           </button>
           <ul className="ml-auto flex items-center">
             <li className="mr-1 dropdown">
-              <a
-                href="/admin/dashboard"
+              <Link
+                href="/admin/add-competition"
                 className="text-black mr-4 rounded flex items-center justify-center  hover:text-gray-600"
               >
                Add Competition
-              </a>
+              </Link>
             </li>
             
             <li className="mr-1 dropdown">
@@ -83,7 +83,7 @@ const navbar = () => {
           className="flex font-semibold items-center py-2 px-4 text-black hover:bg-blue hover:text-gray-100 rounded-md group-[.active]:bg-blue group-[.active]:text-white group-[.selected]:bg-blue group-[.selected]:text-gray-100"
         >
           <i className="ri-home-2-line mr-3 text-lg" />
-          <span className="text-sm">Dashboard</span>
+          <Link href={'/admin/dashboard'} className="text-sm">Dashboard</Link>
         </a>
       </li>
       <li className="mb-1 group">
@@ -92,44 +92,14 @@ const navbar = () => {
           className="flex font-semibold items-center py-2 px-4 text-black hover:bg-blue hover:text-gray-100 rounded-md group-[.active]:bg-blue group-[.active]:text-white group-[.selected]:bg-blue group-[.selected]:text-gray-100 sidebar-dropdown-toggle"
         >
           <i className="bx bx-user mr-3 text-lg" />
-          <Link href={'/admin/account'} className="text-sm">View User</Link>
+          <Link href={'/admin/manage-competition'} className="text-sm">Manage Competition</Link>
           <i className="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90" />
         </a>
       </li>
-      <li className="mb-1 group">
-        <a
-          href=""
-          className="flex font-semibold items-center py-2 px-4 text-black hover:bg-blue hover:text-gray-100 rounded-md group-[.active]:bg-blue group-[.active]:text-white group-[.selected]:bg-blue group-[.selected]:text-gray-100"
-        >
-          <i className="bx bx-list-ul mr-3 text-lg" />
-          <span className="text-sm">Competition Declare</span>
-        </a>
-      </li>
-      <span className="text-black font-bold">PERSONAL</span>
-      <li className="mb-1 group">
-        <a
-          href=""
-          className="flex font-semibold items-center py-2 px-4 text-black hover:bg-blue hover:text-gray-100 rounded-md group-[.active]:bg-blue group-[.active]:text-white group-[.selected]:bg-blue group-[.selected]:text-gray-100"
-        >
-          <i className="bx bx-bell mr-3 text-lg" />
-          <span className="text-sm">Notifications</span>
-          <span className=" md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red  rounded-full">
-            5
-          </span>
-        </a>
-      </li>
-      <li className="mb-1 group">
-        <a
-          href=""
-          className="flex font-semibold items-center py-2 px-4 text-black hover:bg-blue hover:text-gray-100 rounded-md group-[.active]:bg-blue group-[.active]:text-white group-[.selected]:bg-blue group-[.selected]:text-gray-100"
-        >
-          <i className="bx bx-envelope mr-3 text-lg" />
-          <span className="text-sm">Messages</span>
-          <span className=" md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-green-600 bg-green-200 rounded-full">
-            2 New
-          </span>
-        </a>
-      </li>
+      
+     
+     
+      
     </ul>
   </div>
   <div className="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay" />

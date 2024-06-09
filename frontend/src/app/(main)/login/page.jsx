@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import useAppContext from '../../../context/AppContext';
 
 
 const LoginSchema = Yup.object().shape({
@@ -18,6 +19,8 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
 
   const router = useRouter();
+  const { setLoggedIn, setCurrentUser } = useAppContext();
+  
 
   const loginForm = useFormik({
     initialValues: {
@@ -41,8 +44,15 @@ const Login = () => {
 
             response.json()
               .then((data) => {
-                sessionStorage.setItem('user', JSON.stringify(data));
-                router.push('/');
+                localStorage.setItem('user', JSON.stringify(data));
+                setLoggedIn(true);
+                setCurrentUser(data);
+                document.cookie = `token=${data.email}`;
+                if(data.isAdmin){
+                  router.push('/admin/dashboard');
+                }else{
+                  router.push('/');
+                }
               })
 
           } else {

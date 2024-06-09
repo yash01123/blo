@@ -8,7 +8,7 @@ const CompetitionDetails = () => {
   const { id } = useParams();
   // console.log(id);
   const [competitionData, setCompetitionData] = useState(null);
-  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [selBlog, setSelBlog] = useState(null);
   const [blogList, setBlogList] = useState([]);
 

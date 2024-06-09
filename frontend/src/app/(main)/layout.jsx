@@ -7,18 +7,12 @@ import Footer from './Footer'
 const MainLayout = ({ children }) => {
     return (
         <>
-            <html>
-                <body>
-                    <Navbar />
-                  
-                    
-                    {children}  
-                    
-                    <Footer />
-                   
-                </body>
-            </html>
+            <Navbar />
 
+
+            {children}
+
+            <Footer />  
         </>
     )
 }
